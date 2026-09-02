@@ -39,10 +39,10 @@
 │ • Focus: Android/Linux Kernels│              │ • Focus: Embedded Linux Userspace│               │ • Focus: Native Android Apps/CLI │
 │ • C Library: Freestanding     │              │ • C Library: Musl 1.2.6          │               │ • C Library: Android Bionic Libc │
 │ • Target: aarch64-linux-gnu-  │              │ • Target: aarch64-higgs_gluon-   │               │ • Target: aarch64-linux-android- │
-│ • Host: 100% Static (Jemalloc)│              │           linux-musl             │               │ • Status: On Roadmap             │
-│ • Submodule:                  │              │ • Submodules:                    │               │                                  │
-│   higgs-gluon-kernel          │              │   🔹 higgs-gluon-musl-clang      │               │                                  │
-│ • Status: Released & Live     │              │   🔹 higgs-gluon-musl-gcc (TBD)  │               │                                  │
+│ • Host: 100% Static (Jemalloc)│              │           linux-musl             │               │ • Host: 100% Static (Portable)   │
+│ • Submodule:                  │              │ • Submodules:                    │               │ • Submodule:                     │
+│   higgs-gluon-kernel          │              │   🔹 higgs-gluon-musl-clang      │               │   🔹 higgs-gluon-ndk             │
+│ • Status: Released & Live     │              │   🔹 higgs-gluon-musl-gcc (TBD)  │               │ • Status: Released & Live        │
 │                               │              │ • Status: Released & Live        │               │                                  │
 └───────────────────────────────┘              └──────────────────────────────────┘               └──────────────────────────────────┘
 ```
@@ -63,11 +63,12 @@
 * **Target Focus**: Raspberry Pi (3/4/5), `systemd-nspawn` container environments, single-board computers, and secure static userspace binaries.
 * **Target Tuple**: `aarch64-higgs_gluon-linux-musl` *(with `aarch64-higgs-gluon-linux-musl` aliases)*
 
-### 3. Higgs-Gluon Musl GCC Edition *(Planned)*
-* **Target Focus**: Complete GNU GCC + Musl toolchain variant for legacy C/C++ codebases requiring GCC extensions.
-
-### 4. Higgs-Gluon NDK Edition *(Roadmap)*
-* **Target Focus**: Native Android CLI daemons, Magisk modules, and native C/C++ applications linked against Android Bionic libc across API levels 29–36 (Android 10–16).
+### 3. [Higgs-Gluon Android NDK Edition](higgs-gluon-ndk)
+* **Repository Submodule**: [`higgs-gluon-ndk`](higgs-gluon-ndk) / [`codingWiz-rick/higgs-gluon-ndk`](https://github.com/codingWiz-rick/higgs-gluon-ndk)
+* **Engine**: 100% Static Clang 24 toolchain bundled with **Android Bionic Sysroot** (APIs 21 through 36).
+* **Target Focus**: Native Android CLI daemons, AI/ML inference runtimes, and native libraries with pre-installed `mimalloc`, `jemalloc`, LLVM OpenMP (`libomp`), and `OpenBLAS`.
+* **Target ABIs**: `arm64-v8a`, `armeabi-v7a`, `x86_64`, `riscv64`.
+* **Integration**: Direct native compiler drivers & drop-in CMake toolchain file (`android.toolchain.cmake`).
 
 ---
 
@@ -109,6 +110,9 @@ git clone https://github.com/codingWiz-rick/higgs-gluon-kernel.git
 
 # Clone the Embedded Musl Clang Toolchain:
 git clone https://github.com/codingWiz-rick/higgs-gluon-musl-clang.git
+
+# Clone the Android NDK Toolchain:
+git clone https://github.com/codingWiz-rick/higgs-gluon-ndk.git
 ```
 
 ---
