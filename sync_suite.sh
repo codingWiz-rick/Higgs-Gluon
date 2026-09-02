@@ -16,7 +16,7 @@ echo -e "${CYAN}[*] Starting Higgs-Gluon Suite Synchronization...${NC}"
 # 1. Sync & Push each submodule
 for sub in "${SUBMODULES[@]}"; do
     SUB_DIR="${SUITE_ROOT}/${sub}"
-    if [ ! -d "${SUB_DIR}/.git" ]; then
+    if [ ! -e "${SUB_DIR}/.git" ]; then
         echo -e "${YELLOW}[!] Submodule ${sub} not found or missing .git at ${SUB_DIR}${NC}"
         continue
     fi
