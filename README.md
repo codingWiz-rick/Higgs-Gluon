@@ -38,31 +38,35 @@
 ├───────────────────────────────┤              ├──────────────────────────────────┤               ├──────────────────────────────────┤
 │ • Focus: Android/Linux Kernels│              │ • Focus: Embedded Linux Userspace│               │ • Focus: Native Android Apps/CLI │
 │ • C Library: Freestanding     │              │ • C Library: Musl 1.2.6          │               │ • C Library: Android Bionic Libc │
-│ • Target: aarch64-linux-gnu-  │              │ • Target: aarch64-higgs-gluon-   │               │ • Target: aarch64-linux-android- │
+│ • Target: aarch64-linux-gnu-  │              │ • Target: aarch64-higgs_gluon-   │               │ • Target: aarch64-linux-android- │
 │ • Host: 100% Static (Jemalloc)│              │           linux-musl             │               │ • Status: On Roadmap             │
-│ • Sub-repo: higgs-gluon-kernel│              │ • Variants: Clang 24 & GCC       │               │                                  │
-│ • Status: Released & Live     │              │ • Sub-repo: higgs-gluon-musl     │               │                                  │
-│                               │              │ • Status: Active Implementation  │               │                                  │
+│ • Submodule:                  │              │ • Submodules:                    │               │                                  │
+│   higgs-gluon-kernel          │              │   🔹 higgs-gluon-musl-clang      │               │                                  │
+│ • Status: Released & Live     │              │   🔹 higgs-gluon-musl-gcc (TBD)  │               │                                  │
+│                               │              │ • Status: Released & Live        │               │                                  │
 └───────────────────────────────┘              └──────────────────────────────────┘               └──────────────────────────────────┘
 ```
 
 ---
 
-## Toolchain Editions
+## Toolchain Editions & Submodules
 
 ### 1. [Higgs-Gluon Kernel Edition](higgs-gluon-kernel)
-* **Repository**: [`codingWiz-rick/higgs-gluon-kernel`](https://github.com/codingWiz-rick/higgs-gluon-kernel)
+* **Repository Submodule**: [`higgs-gluon-kernel`](higgs-gluon-kernel) / [`codingWiz-rick/higgs-gluon-kernel`](https://github.com/codingWiz-rick/higgs-gluon-kernel)
 * **Engine**: LLVM 24.0.0git + 2-Tier Context-Sensitive PGO + BOLT (Ext-TSP / CDSort) + Cross-module ThinLTO + Embedded Jemalloc.
 * **Target Focus**: Android Generic Kernel Images (GKI 5.10, 6.1, 6.6), Qualcomm Snapdragon (MSM8937, SM6225 Bengal), and Upstream Mainline Linux.
 * **Performance**: **240.49s** GKI 6.1 compilation (0.96 IPC) vs Neutron Clang's 252.02s.
 
-### 2. [Higgs-Gluon Embedded Edition (Musl)](https://github.com/codingWiz-rick/higgs-gluon-musl)
-* **Repository**: [`codingWiz-rick/higgs-gluon-musl`](https://github.com/codingWiz-rick/higgs-gluon-musl)
-* **Engine**: 100% Static Clang 24 & GCC toolchains bundled with **Musl 1.2.6** libc, Compiler-RT builtins, and full ARM64 target sysroot.
+### 2. [Higgs-Gluon Musl Clang Edition](higgs-gluon-musl-clang)
+* **Repository Submodule**: [`higgs-gluon-musl-clang`](higgs-gluon-musl-clang) / [`codingWiz-rick/higgs-gluon-musl-clang`](https://github.com/codingWiz-rick/higgs-gluon-musl-clang)
+* **Engine**: 100% Static Clang 24 toolchain bundled with **Musl 1.2.6** libc, Compiler-RT builtins, and full ARM64 target sysroot.
 * **Target Focus**: Raspberry Pi (3/4/5), `systemd-nspawn` container environments, single-board computers, and secure static userspace binaries.
-* **Target Tuple**: `aarch64-higgs-gluon-linux-musl`
+* **Target Tuple**: `aarch64-higgs_gluon-linux-musl` *(with `aarch64-higgs-gluon-linux-musl` aliases)*
 
-### 3. Higgs-Gluon NDK Edition *(Roadmap)*
+### 3. Higgs-Gluon Musl GCC Edition *(Planned)*
+* **Target Focus**: Complete GNU GCC + Musl toolchain variant for legacy C/C++ codebases requiring GCC extensions.
+
+### 4. Higgs-Gluon NDK Edition *(Roadmap)*
 * **Target Focus**: Native Android CLI daemons, Magisk modules, and native C/C++ applications linked against Android Bionic libc across API levels 29–36 (Android 10–16).
 
 ---
@@ -100,11 +104,11 @@ git clone --recurse-submodules https://github.com/codingWiz-rick/Higgs-Gluon.git
 Or clone individual sub-repositories directly:
 
 ```bash
-# Clone only the Kernel Toolchain:
+# Clone the Kernel Toolchain:
 git clone https://github.com/codingWiz-rick/higgs-gluon-kernel.git
 
-# Clone only the Embedded Musl Toolchain:
-git clone https://github.com/codingWiz-rick/higgs-gluon-musl.git
+# Clone the Embedded Musl Clang Toolchain:
+git clone https://github.com/codingWiz-rick/higgs-gluon-musl-clang.git
 ```
 
 ---
