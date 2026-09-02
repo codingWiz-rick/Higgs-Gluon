@@ -1,3 +1,6 @@
 [submodule "higgs-gluon-kernel"]
 	path = higgs-gluon-kernel
 	url = https://github.com/codingWiz-rick/higgs-gluon-kernel.git
+[submodule "higgs-gluon-musl-clang"]
+	path = higgs-gluon-musl-clang
+	url = https://github.com/codingWiz-rick/higgs-gluon-musl-clang.git
